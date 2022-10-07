@@ -1,5 +1,9 @@
-export const App = () => {
+import Routes from "./routes"
+
+const App = () => {
   return (
-    <div></div>
+    <Routes/>
   )
 }
+
+export default App
