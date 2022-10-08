@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from "@hookform/resolvers/yup"
+import { yupResolver } from '@hookform/resolvers/yup'
 import { ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { notifySuccess } from '../../toast'
+import { notifySuccess, notifyError } from '../../toast'
 import Button from '../../components/Button'
 import Menu from '../../components/Menu'
 import api from '../../services/api.js'
@@ -31,6 +31,7 @@ const Register = () => {
                 notifySuccess()
                 setTimeout(() => navigate('/'), 3000)
             })
+            .catch(error => error.response.data.message === 'Email already exists' ? notifyError() : undefined)
         }
     }, [createUser, navigate])
 
@@ -45,7 +46,7 @@ const Register = () => {
                 <p>Rapido e grátis, vamos nessa</p>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <label htmlFor="username">Nome</label>
+                    <label htmlFor='username'>Nome</label>
                     <input
                     type='text'
                     id='username'
@@ -53,7 +54,7 @@ const Register = () => {
                     </input>
                     <p>{errors.name?.message}</p>
             
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor='email'>Email</label>
                     <input
                     type='email'
                     id='email'
@@ -61,7 +62,7 @@ const Register = () => {
                     </input>
                     <p>{errors.email?.message}</p>
             
-                    <label htmlFor="password">Senha</label>
+                    <label htmlFor='password'>Senha</label>
                     <input
                     type='password'
                     id='password'
@@ -69,7 +70,7 @@ const Register = () => {
                     </input>
                     <p>{errors.password?.message}</p>
             
-                    <label htmlFor="confirmPassword">Confirmar senha</label>
+                    <label htmlFor='confirmPassword'>Confirmar senha</label>
                     <input
                     type='password'
                     id='confirmPassword'
@@ -77,7 +78,7 @@ const Register = () => {
                     </input>
                     <p>{errors.confirmPassword?.message}</p>
             
-                    <label htmlFor="bio">Bio</label>
+                    <label htmlFor='bio'>Bio</label>
                     <input
                     type='text'
                     id='bio'
@@ -85,7 +86,7 @@ const Register = () => {
                     </input>
                     <p>{errors.bio?.message}</p>
             
-                    <label htmlFor="contact">Contato</label>
+                    <label htmlFor='contact'>Contato</label>
                     <input
                     type='text'
                     id='contact'
