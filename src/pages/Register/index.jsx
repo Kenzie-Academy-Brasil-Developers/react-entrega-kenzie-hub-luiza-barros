@@ -1,65 +1,27 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
-import api from '../../services/api.js'
+import { ToastContainer } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { notifySuccess } from '../../toast'
 import Button from '../../components/Button'
 import Menu from '../../components/Menu'
-import { ToastContainer, toast } from 'react-toastify'
+import api from '../../services/api.js'
+import formSchema from './formSchema'
+import arrayForSelect from './arrayForSelect'
 import 'react-toastify/dist/ReactToastify.css'
-import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
     const [createUser, setCreateUser] = useState(null)
     const [createUserResponse, setCreateUserResponse] = useState(null)
     const navigate = useNavigate()
-
-    const formSchema  = yup.object().shape({
-        email: yup
-            .string()
-            .email('Email inválido')
-            .required('Email obrigatório'),
-
-        password: yup
-            .string()
-            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, 'Senha deve conter no mínimo 8 caracteres. Necessário ter letras, números e ao menos um símbolo')
-            .required('Senha obrigatória'),
-            
-
-        confirmPassword: yup
-            .string()
-            .required('Confirmar senha é obrigatório')
-            .oneOf([yup.ref('password')], 'Confirmação de senha deve ser igual a senha'),
-
-        name: yup
-            .string()
-            .required('Nome obrigatório'),
-
-        bio: yup
-            .string()
-            .required('Bio obrigatória'),
-
-        contact: yup
-            .string()
-            .required('Contato obrigatório'),
-
-        course_module: yup
-            .string()
-            .required('Selecionar módulo é obrigatório')
-    })
-
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(formSchema) })
+    
+    const { 
+        register, 
+        handleSubmit, 
+        formState: { errors } } 
+        = useForm({ resolver: yupResolver(formSchema) })
     const onSubmit = data => setCreateUser(data)
-
-    const arrayForSelect = [
-        'Primeiro módulo (Introdução ao Frontend)', 
-        'Segundo módulo (Frontend Avançado)', 
-        'Terceiro módulo (Introdução ao Backend)', 
-        'Quarto módulo (Backend Avançado)'
-    ]
-
-    const notifySuccess = () => toast.success('Cadastro realizado com sucesso!')
-    const notifyError = () => toast.error('Ops! Algo deu errado')
 
     useEffect(() => {
         if (createUser !== null) {
