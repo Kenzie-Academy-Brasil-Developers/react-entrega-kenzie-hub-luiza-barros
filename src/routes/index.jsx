@@ -9,9 +9,8 @@ const RoutesMain = () => {
 
     return (
         <Routes>
-            <Route path='/' element={ <Login user={user} setUser={setUser}/> }>
-                <Route path='/dashboard' element={ <Dashboard/> }/>
-            </Route>
+            <Route path='/' element={ <Login user={user} setUser={setUser}/> }/>
+            <Route path='/dashboard' element={ <Dashboard user={user} setUser={setUser}/> }/>
             <Route path='/registro' element={ <Register/> }/>
         </Routes>
     )
