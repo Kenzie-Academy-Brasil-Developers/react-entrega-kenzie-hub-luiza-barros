@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ToastContainer } from 'react-toastify'
@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css'
 const Login = ({ user, setUser }) => {
     const [loginUser, setLoginUser] = useState(null)
     const [loginUserResponse, setLoginUserResponse] = useState(null)
+    const load = useRef()
     const navigate = useNavigate()
     
     const { 
@@ -21,6 +22,10 @@ const Login = ({ user, setUser }) => {
         formState: { errors } } 
         = useForm({ resolver: yupResolver(formSchema) })
     const onSubmit = data => setLoginUser(data)
+
+    function loader() {
+        load.current.className = 'loader'
+    }
 
     useEffect(() => {
         if (loginUser !== null) {
@@ -33,7 +38,8 @@ const Login = ({ user, setUser }) => {
                 localStorage.setItem('@userid', response.data.user.id)
                 setUser(response.data.user)
 
-                setTimeout(() => navigate('/dashboard'), 3000)
+                setTimeout(() => loader(), 5000)
+                navigate('/dashboard')
             })
             .catch(error => error.response.data.message === 'Incorrect email / password combination' 
             ? notifyError() 
@@ -74,6 +80,8 @@ const Login = ({ user, setUser }) => {
                     <p>Ainda não possui uma conta?</p>
                     <input type='button' value='Cadastrar' onClick={() => navigate('/registro')}/>
                 </form>
+
+                <div ref={load}></div>
             </div>
         </section>
     )
