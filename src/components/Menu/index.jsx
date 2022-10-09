@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import KenzieHub from '../../assets/Logo.png'
+import Container from './styles/menu'
 
 const Menu = ({ content }) => {
     const navigate = useNavigate()
@@ -10,10 +10,12 @@ const Menu = ({ content }) => {
     }
 
     return (
-        <div>
-            <img src={ KenzieHub } alt='Kenzie Hub'/>
-            <button type='button' onClick={() => alterPage()}>{ content }</button>
-        </div>
+        <Container>
+            <header>
+                <h1 className='kenziehub'>Kenzie Hub</h1>
+                <button type='button' onClick={() => alterPage()}>{ content }</button>
+            </header>
+        </Container>
     )
 }
 

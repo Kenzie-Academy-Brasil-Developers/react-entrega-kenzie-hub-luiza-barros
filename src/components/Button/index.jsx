@@ -1,2 +1,2 @@
-const Button = ({ typeName, content}) => <button type={ typeName }>{ content }</button>
+const Button = ({ typeName, content, className }) => <button type={ typeName } className={className}>{ content }</button>
 export default Button

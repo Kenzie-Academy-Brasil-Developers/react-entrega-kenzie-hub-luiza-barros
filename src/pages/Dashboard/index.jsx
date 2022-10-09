@@ -1,14 +1,17 @@
 import Menu from '../../components/Menu'
+import NavBar from './styles/userProfileInfo'
 
 const Dashboard = ({ user, setUser}) => {
     return (
         <div>
-            <Menu content='sair'/>
+            <Menu content='Sair'/>
             
-            <section>
+            <NavBar>
                 <h2>Olá, {user.name}</h2>
                 <p>{user.course_module}</p>
-            </section>
+            </NavBar>
+
+            <main></main>
         </div>
     )
 }
