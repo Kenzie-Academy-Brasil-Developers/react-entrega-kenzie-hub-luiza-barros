@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import KenzieHub from './assets/Logo.png'
+import KenzieHub from '../../assets/Logo.png'
 
 const Menu = ({ content }) => {
     const navigate = useNavigate()
