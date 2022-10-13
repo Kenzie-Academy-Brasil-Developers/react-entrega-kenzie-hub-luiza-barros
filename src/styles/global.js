@@ -35,7 +35,7 @@ const Global = createGlobalStyle`
     }
 
     div#root {
-        height: 200vh;
+        min-height: 800px;
     }
 
     body {

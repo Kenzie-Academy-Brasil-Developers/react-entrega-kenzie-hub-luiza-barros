@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { notifySuccess, notifyError } from '../../toast'
 import { AuthContext } from '../contexts/AuthContext'
 import Button from '../../components/Button'
@@ -14,8 +14,9 @@ const Login = () => {
     const [loginUser, setLoginUser] = useState(null)
     const { setUser } = useContext(AuthContext)
     const load = useRef()
+
     const navigate = useNavigate()
-    
+
     const { 
         register, 
         handleSubmit, 
