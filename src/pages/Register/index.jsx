@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { notifySuccess, notifyError } from '../../toast'
 import Button from '../../components/Button'
@@ -25,22 +24,26 @@ const Register = () => {
     const onSubmit = data => setCreateUser(data)
 
     useEffect(() => {
-        if (createUser !== null) {
-            api.post('/users', createUser)
-            .then(response => {
-                setCreateUserResponse(response)
-                notifySuccess()
-                setTimeout(() => navigate('/'), 3000)
-            })
-            .catch(error => error.response.data.message === 'Email already exists' ? notifyError() : undefined)
+        async function registerUser() {
+            if (createUser) {
+                try {
+                    const response = await api.post('/users', createUser)
+                    setCreateUserResponse(response)
+                    notifySuccess()
+                    setTimeout(() => navigate('/'), 1000)
+
+                } catch (error) {
+                    // eslint-disable-next-line no-unused-expressions
+                    error.response.data.message === 'Email already exists' ? notifyError() : undefined
+                }
+            }
         }
+        registerUser()
     }, [createUser, navigate])
 
     return (
         <Container>
             <section className='register'>
-                <ToastContainer/>
-
                 <Menu content='Voltar'/>
 
                 <div className='formWrapper'>

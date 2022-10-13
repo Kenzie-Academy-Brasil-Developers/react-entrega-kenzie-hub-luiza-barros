@@ -31,6 +31,7 @@ const Global = createGlobalStyle`
         outline: 0;
         border: 0;
         line-height: 20px;
+        text-decoration: none;
     }
 
     div#root {
@@ -42,8 +43,11 @@ const Global = createGlobalStyle`
         overflow-x: hidden;
     }
 
-    button, input, select {
+    button, input, select, a {
         border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     input, select {
@@ -59,7 +63,7 @@ const Global = createGlobalStyle`
         border: 1.22px solid var(--grey-0);
     }
 
-    label, input {
+    label, input, a {
         font: var(--headline);
     }
 
@@ -67,7 +71,7 @@ const Global = createGlobalStyle`
         color: var(--grey-0);
     }
 
-    button {
+    button, a {
         cursor: pointer;
         padding: 0 2.2rem;
         color: var(--white);

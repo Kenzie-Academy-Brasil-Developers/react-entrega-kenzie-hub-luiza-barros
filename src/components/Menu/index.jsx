@@ -1,19 +1,12 @@
-import { useNavigate } from 'react-router-dom'
-import Container from './styles/menu'
+import { Link } from 'react-router-dom'
+import Container from './menu.js'
 
 const Menu = ({ content }) => {
-    const navigate = useNavigate()
-
-    function alterPage() {
-        localStorage.clear()
-        navigate('/')
-    }
-
     return (
         <Container>
             <header>
                 <h1 className='kenziehub'>Kenzie Hub</h1>
-                <button type='button' onClick={() => alterPage()}>{ content }</button>
+                <Link to={'/'} onClick={() => localStorage.clear()}>{ content }</Link>
             </header>
         </Container>
     )

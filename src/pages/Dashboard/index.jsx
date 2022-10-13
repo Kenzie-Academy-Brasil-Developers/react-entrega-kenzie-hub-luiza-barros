@@ -1,5 +1,5 @@
 import Menu from '../../components/Menu'
-import NavBar from './styles/userProfileInfo'
+import NavBar from './userProfileInfo.js'
 
 const Dashboard = ({ user, setUser}) => {
     return (

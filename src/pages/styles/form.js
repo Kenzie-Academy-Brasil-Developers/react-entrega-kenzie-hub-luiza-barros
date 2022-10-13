@@ -48,16 +48,6 @@ const Container = styled.div `
         background: var(--color-primary-focus);
     }
 
-    .navigateToRegister {
-        background: var(--grey-1);
-        color: var(--white);
-        cursor: pointer;
-    }
-    
-    .navigateToRegister:hover {
-        background: var(--grey-2);
-    }
-
     .suggestion {
         color: var(--grey-1);
         font: var(--headline-shorter);
@@ -91,9 +81,19 @@ const Container = styled.div `
         gap: 10px;
     }
 
-    button {
+    button, a {
         width: 100%;
         height: 38px;
+    }
+
+    a.navigateToRegister {
+        background: var(--grey-1);
+        color: var(--white);
+        cursor: pointer;
+    }
+    
+    a.navigateToRegister:hover {
+        background: var(--grey-2);
     }
 
     @media (min-width: 380px) {

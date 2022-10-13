@@ -12,14 +12,14 @@ const Container = styled.div `
         padding: 1.5rem;
     }
 
-    header button {
+    header a {
         height: 31px;
         width: max-content;
         background: var(--grey-3);
         font: var(--headline);
     }
 
-    header button:hover {
+    header a:hover {
         background: var(--grey-1);
     }
 `
