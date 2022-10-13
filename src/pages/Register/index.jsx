@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css'
 
 const Register = () => {
     const [createUser, setCreateUser] = useState(null)
-    const [createUserResponse, setCreateUserResponse] = useState(null)
     const navigate = useNavigate()
     
     const { 
@@ -27,11 +26,9 @@ const Register = () => {
         async function registerUser() {
             if (createUser) {
                 try {
-                    const response = await api.post('/users', createUser)
-                    setCreateUserResponse(response)
+                    await api.post('/users', createUser)
                     notifySuccess()
-                    setTimeout(() => navigate('/'), 1000)
-
+                    navigate('/')
                 } catch (error) {
                     // eslint-disable-next-line no-unused-expressions
                     error.response.data.message === 'Email already exists' ? notifyError() : undefined

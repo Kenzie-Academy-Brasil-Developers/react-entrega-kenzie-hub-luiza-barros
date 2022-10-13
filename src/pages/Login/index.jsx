@@ -1,17 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate, Link } from 'react-router-dom'
 import { notifySuccess, notifyError } from '../../toast'
+import { AuthContext } from '../contexts/AuthContext'
 import Button from '../../components/Button'
 import Container from '../styles/form'
 import api from '../../services/api.js'
 import formSchema from './formSchema'
 import 'react-toastify/dist/ReactToastify.css'
 
-const Login = ({ user, setUser }) => {
+const Login = () => {
     const [loginUser, setLoginUser] = useState(null)
-    const [loginUserResponse, setLoginUserResponse] = useState(null)
+    const { setUser } = useContext(AuthContext)
     const load = useRef()
     const navigate = useNavigate()
     
@@ -27,15 +28,16 @@ const Login = ({ user, setUser }) => {
             if (loginUser) {
                 try {
                     const response = await api.post('/sessions', loginUser)
-                    setLoginUserResponse(response)
                     notifySuccess()
 
-                    localStorage.setItem('@token', response.data.token)
-                    localStorage.setItem('@userid', response.data.user.id)
+                    localStorage.setItem('@kenziehub:token', response.data.token)
+                    localStorage.setItem('@kenziehub:userid', response.data.user.id)
+                    api.defaults.headers.authorization = `Bearer ${response.data.token}`
+                
                     setUser(response.data.user)
 
                     load.current.classList.add('loader')
-                    navigate('/dashboard')
+                    navigate('/dashboard', { replace: true })
                 } catch (error) {
                     // eslint-disable-next-line no-unused-expressions
                     error.response.data.message === 'Incorrect email / password combination' ? notifyError() : undefined

@@ -1,11 +1,15 @@
-import Routes from "./routes"
 import { ToastContainer } from 'react-toastify'
+import Routes from "./routes"
+import AuthProvider from "./pages/contexts/AuthContext"
 
 const App = () => {
   return (
     <div>
       <ToastContainer/>
-      <Routes/>
+
+      <AuthProvider>
+        <Routes/>
+      </AuthProvider>
     </div>
   )
 }
