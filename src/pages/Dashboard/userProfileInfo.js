@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const NavBar = styled.nav `
+export const NavBar = styled.nav `
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,4 +23,30 @@ const NavBar = styled.nav `
     }
 `
 
-export default NavBar
+export const Main = styled.main `
+    section:first-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        height: 18px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+    }
+
+    section:first-child input, section .closeBtn {
+        color: var(--white);
+        background: var(--grey-3);
+        width: 32px;
+        height: 32px;
+        font: var(--title-1);
+        cursor: pointer;
+    }
+
+    h3 {
+        font: var(--title-3);
+        color: var(--grey-0);
+    }
+
+`

@@ -1,6 +1,6 @@
 import { ToastContainer } from 'react-toastify'
-import Routes from "./routes"
-import AuthProvider from "./pages/contexts/AuthContext"
+import Routes from './routes'
+import AuthProvider from './pages/contexts/AuthContext'
 
 const App = () => {
   return (

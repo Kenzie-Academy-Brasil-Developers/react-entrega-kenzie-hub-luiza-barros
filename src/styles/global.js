@@ -15,6 +15,7 @@ const Global = createGlobalStyle`
         --negative: #E83F5B;
         --white: #fff;
         --box-shadow: #64646f33;
+        --modal-bg: #12121480;
         --font-family: 'Inter', sans-serif;
         --title-1: 700 1.8rem var(--font-family);
         --title-2: 600 1.6rem var(--font-family);
