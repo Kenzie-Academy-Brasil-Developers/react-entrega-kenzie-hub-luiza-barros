@@ -1,20 +1,24 @@
 import { AiFillDelete } from 'react-icons/ai'
+import CardStyle from './card'
 
 const Card = ({ techs, setTechID }) => {
     return (
-        <ul>    
+        <CardStyle>    
             {
                 techs.map((tech, index) => (
                     <li key={index}>
                         <h4>{ tech.title }</h4>
-                        <p>{ tech.status }</p>
-                        <span onClick={() => setTechID(tech.id)}>
-                            <AiFillDelete/>
-                        </span>
+                        
+                        <div>
+                            <p>{ tech.status }</p>
+                            <span onClick={() => setTechID(tech.id)}>
+                                <AiFillDelete/>
+                            </span>
+                        </div>
                     </li>
                 ))
             }
-        </ul>
+        </CardStyle>
     )
 }
 

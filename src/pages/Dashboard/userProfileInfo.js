@@ -8,7 +8,7 @@ export const NavBar = styled.nav `
     height: 118px;
     border-top: 1px solid #212529;
     border-bottom: 1px solid #212529;
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 1.5rem;
 
@@ -30,7 +30,7 @@ export const Main = styled.main `
         align-items: center;
         gap: 10px;
         height: 18px;
-        max-width: 1200px;
+        max-width: 800px;
         margin: 0 auto;
         padding: 2rem 1.5rem;
     }
