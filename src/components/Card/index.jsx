@@ -5,7 +5,9 @@ const Card = ({ techs, setTechID }) => {
     return (
         <CardStyle>    
             {
-                techs.map((tech, index) => (
+                techs.length === 0 
+                ? <p>Insira novas tecnologias</p> 
+                : techs.map((tech, index) => (
                     <li key={index}>
                         <h4>{ tech.title }</h4>
                         
@@ -16,7 +18,7 @@ const Card = ({ techs, setTechID }) => {
                             </span>
                         </div>
                     </li>
-                ))
+                   ))
             }
         </CardStyle>
     )
