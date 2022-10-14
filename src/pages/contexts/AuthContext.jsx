@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { notifyError, notifySuccess } from '../../toast/index.jsx'
 import api from '../../services/api.js'
 
 export const AuthContext = createContext({})
@@ -7,6 +8,8 @@ export const AuthContext = createContext({})
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [techID, setTechID] = useState(null)
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -30,8 +33,30 @@ const AuthProvider = ({ children }) => {
         isUserValid()
     }, [navigate])
 
+    useEffect(() => {
+        async function deleteTech() {
+            if (techID) {
+                try {
+                    await api.delete(`/users/techs/${techID}`)
+                    notifySuccess()
+                } catch (error) {
+                    notifyError()
+                }
+            }
+        }
+        deleteTech()
+    }, [techID])
+
+    useEffect(() => {
+        async function checkUser() {
+            const { data } = await api.get('/profile')
+            setUser(data)
+        }
+        checkUser()
+    }, [user])
+
     return (
-        <AuthContext.Provider value={{ user, loading, setUser }}>
+        <AuthContext.Provider value={{ user, loading, techID, setTechID, setUser }}>
             { children }
         </AuthContext.Provider>
     )

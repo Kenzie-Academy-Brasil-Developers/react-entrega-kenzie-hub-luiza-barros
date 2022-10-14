@@ -1,3 +1,5 @@
+import { TechContext } from '../contexts/TechContext'
+import { useContext } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import Button from '../../../components/Button'
@@ -6,12 +8,13 @@ import formSchema from './formSchema'
 
 const Modal = ({ setShowModal }) => {
     const options = ['Iniciante', 'Intermediário', 'Avançado']
-    
+    const { setTech } = useContext(TechContext)
+
     const {
         register, 
         handleSubmit,
         formState: { errors }} = useForm({ resolver: yupResolver(formSchema)})
-    const onSubmit = data => console.log(data)
+    const onSubmit = data => setTech(data)
 
     return (
         <ModalStyle>

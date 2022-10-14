@@ -1,11 +1,13 @@
 import { useContext, useState } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
 import { NavBar, Main } from './userProfileInfo.js'
+import TechProvider from './contexts/TechContext'
 import Menu from '../../components/Menu'
 import Modal from './modal/createTechModal'
+import Card from '../../components/Card'
 
 const Dashboard = () => {
-    const { user } = useContext(AuthContext)
+    const { user, setTechID } = useContext(AuthContext)
     const [showModal, setShowModal] = useState(false)
 
     return (
@@ -26,8 +28,12 @@ const Dashboard = () => {
                         value='+'/>
                     </section>
 
+                    <Card techs={user.techs} setTechID={setTechID}/>
+
                     {
-                        showModal && <Modal setShowModal={setShowModal}/>
+                        showModal && <TechProvider>
+                                        <Modal setShowModal={setShowModal}/>
+                                     </TechProvider>
                     }
                 </Main>
             </div>

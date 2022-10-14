@@ -44,6 +44,7 @@ const ModalStyle = styled.section `
     .content button {
         background: var(--color-primary);
         height: 38px;
+        padding: 1rem;
     }
 
     .content button:hover {
