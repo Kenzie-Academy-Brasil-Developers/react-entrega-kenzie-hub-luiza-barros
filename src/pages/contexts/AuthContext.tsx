@@ -15,11 +15,16 @@ interface iUser {
     course_module: string,
     bio: string,
     contact: string,
-    techs: iTech
+    techs: iTech[] | null
 }
 
 interface iAuthContext {
-    
+    user: iUser | null,
+    loading: boolean,
+    techID: string | null
+    setUser: React.Dispatch<React.SetStateAction<iUser | null>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    setTechID: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 export const AuthContext = createContext<iAuthContext>({} as iAuthContext)
@@ -75,7 +80,7 @@ const AuthProvider = ({ children }: iAuthProvider) => {
     }, [user])
 
     return (
-        <AuthContext.Provider value={{ user, loading, techID, setTechID, setUser }}>
+        <AuthContext.Provider value={{ user, loading, techID, setTechID, setUser, setLoading }}>
             { children }
         </AuthContext.Provider>
     )

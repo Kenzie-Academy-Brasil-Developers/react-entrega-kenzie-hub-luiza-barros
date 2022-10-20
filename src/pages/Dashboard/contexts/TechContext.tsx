@@ -11,7 +11,12 @@ interface iTechModal {
     status: string
 }
 
-export const TechContext = createContext({})
+interface iTechContext {
+    tech: iTechModal | null,
+    setTech:  React.Dispatch<React.SetStateAction<iTechModal | null>>
+}
+
+export const TechContext = createContext<iTechContext>({} as iTechContext)
 
 const TechProvider = ({ children }: iTechProvider) => {
     const [tech, setTech] = useState<iTechModal | null>(null)

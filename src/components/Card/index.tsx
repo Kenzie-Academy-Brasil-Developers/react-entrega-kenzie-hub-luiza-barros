@@ -8,7 +8,7 @@ export interface iTech {
 }
 
 interface iCard {
-    techs: iTech[],
+    techs: iTech[] | null | undefined,
     setTechID: React.Dispatch<React.SetStateAction<string | null>>
 }
 
@@ -16,9 +16,9 @@ const Card = ({ techs, setTechID }: iCard) => {
     return (
         <CardStyle>    
             {
-                techs.length === 0 
+                techs?.length === 0 
                 ? <p>Insira novas tecnologias</p> 
-                : techs.map((tech: iTech, index: number) => (
+                : techs?.map((tech: iTech, index: number) => (
                     <li key={index}>
                         <h4>{ tech.title }</h4>
                         

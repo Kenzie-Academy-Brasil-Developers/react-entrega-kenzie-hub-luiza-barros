@@ -15,8 +15,8 @@ const Dashboard = () => {
                 <Menu content='Sair'/>
     
                 <NavBar>
-                    <h2>Olá, {user.name}</h2>
-                    <p>{user.course_module}</p>
+                    <h2>Olá, {user?.name}</h2>
+                    <p>{user?.course_module}</p>
                 </NavBar>
     
                 <Main>
@@ -28,7 +28,7 @@ const Dashboard = () => {
                         value='+'/>
                     </section>
 
-                    <Card techs={user.techs} setTechID={setTechID}/>
+                    <Card techs={user?.techs} setTechID={setTechID}/>
 
                     {
                         showModal && <TechProvider>
