@@ -1,13 +1,24 @@
 import { AiFillDelete } from 'react-icons/ai'
 import CardStyle from './card'
 
-const Card = ({ techs, setTechID }) => {
+interface iTech {
+    title: string,
+    status: string,
+    id: string
+}
+
+interface iCard {
+    techs: iTech[],
+    setTechID: 
+}
+
+const Card = ({ techs, setTechID }: iCard) => {
     return (
         <CardStyle>    
             {
                 techs.length === 0 
                 ? <p>Insira novas tecnologias</p> 
-                : techs.map((tech, index) => (
+                : techs.map((tech: iTech, index: number) => (
                     <li key={index}>
                         <h4>{ tech.title }</h4>
                         

@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
-import { NavBar, Main } from './userProfileInfo.js'
+import { NavBar, Main } from './userProfileInfo'
 import TechProvider from './contexts/TechContext'
 import Menu from '../../components/Menu'
 import Modal from './modal/createTechModal'

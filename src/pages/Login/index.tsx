@@ -6,7 +6,7 @@ import { notifySuccess, notifyError } from '../../toast'
 import { AuthContext } from '../contexts/AuthContext'
 import Button from '../../components/Button'
 import Container from '../styles/form'
-import api from '../../services/api.js'
+import api from '../../services/api'
 import formSchema from './formSchema'
 import 'react-toastify/dist/ReactToastify.css'
 

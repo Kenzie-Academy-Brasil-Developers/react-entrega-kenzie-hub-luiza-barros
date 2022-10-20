@@ -1,10 +1,14 @@
-import { createContext, useEffect, useState } from 'react'
-import { notifyError, notifySuccess } from '../../../toast/index.jsx'
-import api from '../../../services/api.js'
+import { createContext, ReactNode, useEffect, useState } from 'react'
+import { notifyError, notifySuccess } from '../../../toast/index'
+import api from '../../../services/api'
+
+interface iTechProvider {
+    children: ReactNode
+}
 
 export const TechContext = createContext({})
 
-const TechProvider = ({ children }) => {
+const TechProvider = ({ children }: iTechProvider) => {
     const [tech, setTech] = useState(null)
 
     useEffect(() => {

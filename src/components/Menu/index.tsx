@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom'
-import Container from './menu.js'
+import Container from './menu'
 
-const Menu = ({ content }) => {
+interface iMenu {
+    content: string
+}
+
+const Menu = ({ content }: iMenu) => {
     return (
         <Container>
             <header>

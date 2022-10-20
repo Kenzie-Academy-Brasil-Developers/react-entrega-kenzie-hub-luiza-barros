@@ -1,11 +1,15 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { notifyError, notifySuccess } from '../../toast/index.jsx'
-import api from '../../services/api.js'
+import { notifyError, notifySuccess } from '../../toast/index'
+import api from '../../services/api'
+
+interface iAuthProvider {
+    children: ReactNode
+}
 
 export const AuthContext = createContext({})
 
-const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }: iAuthProvider) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const [techID, setTechID] = useState(null)

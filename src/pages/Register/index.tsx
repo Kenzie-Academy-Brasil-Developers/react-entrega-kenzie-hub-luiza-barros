@@ -6,7 +6,7 @@ import { notifySuccess, notifyError } from '../../toast'
 import Button from '../../components/Button'
 import Menu from '../../components/Menu'
 import Container from '../styles/form'
-import api from '../../services/api.js'
+import api from '../../services/api'
 import formSchema from './formSchema'
 import arrayForSelect from './arrayForSelect'
 import 'react-toastify/dist/ReactToastify.css'
@@ -30,7 +30,7 @@ const Register = () => {
                     notifySuccess()
                     navigate('/')
                 } catch (error) {
-                    // eslint-disable-next-line no-unused-expressions
+                    // eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
                     error.response.data.message === 'Email already exists' ? notifyError() : undefined
                 }
             }

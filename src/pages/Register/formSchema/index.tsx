@@ -8,6 +8,7 @@ const formSchema  = yup.object().shape({
 
     password: yup
         .string()
+        // eslint-disable-next-line no-useless-escape
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, 'Senha deve conter no mínimo 8 caracteres. Necessário ter letras, números e ao menos um símbolo')
         .required('Senha obrigatória'),
         
