@@ -7,13 +7,19 @@ import { AuthContext } from '../contexts/AuthContext'
 import Button from '../../components/Button'
 import Container from '../styles/form'
 import api from '../../services/api'
+import axios from 'axios'
 import formSchema from './formSchema'
 import 'react-toastify/dist/ReactToastify.css'
 
+interface iUserRegister {
+    email: string,
+    password: string
+}
+
 const Login = () => {
-    const [loginUser, setLoginUser] = useState(null)
+    const [loginUser, setLoginUser] = useState<iUserRegister | null>(null)
     const { setUser } = useContext(AuthContext)
-    const load = useRef()
+    const load = useRef<HTMLDivElement>(null)
 
     const navigate = useNavigate()
 
@@ -21,8 +27,8 @@ const Login = () => {
         register, 
         handleSubmit, 
         formState: { errors } } 
-        = useForm({ resolver: yupResolver(formSchema) })
-    const onSubmit = data => setLoginUser(data)
+        = useForm<iUserRegister>({ resolver: yupResolver(formSchema) })
+    const onSubmit = (data: iUserRegister) => setLoginUser(data)
 
     useEffect(() => {
         async function loadUser() {
@@ -37,11 +43,13 @@ const Login = () => {
                 
                     setUser(response.data.user)
 
-                    load.current.classList.add('loader')
+                    load.current?.classList.add('loader')
                     navigate('/dashboard', { replace: true })
                 } catch (error) {
-                    // eslint-disable-next-line no-unused-expressions
-                    error.response.data.message === 'Incorrect email / password combination' ? notifyError() : undefined
+                    if (axios.isAxiosError(error)) {
+                        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                        error.response?.data.message === 'Incorrect email / password combination' ? notifyError() : undefined
+                    }
                 }
             }
         }

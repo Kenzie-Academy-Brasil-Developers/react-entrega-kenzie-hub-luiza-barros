@@ -6,10 +6,15 @@ interface iTechProvider {
     children: ReactNode
 }
 
+interface iTechModal {
+    title: string,
+    status: string
+}
+
 export const TechContext = createContext({})
 
 const TechProvider = ({ children }: iTechProvider) => {
-    const [tech, setTech] = useState(null)
+    const [tech, setTech] = useState<iTechModal | null>(null)
 
     useEffect(() => {
         async function createTech() {

@@ -7,20 +7,31 @@ import Button from '../../components/Button'
 import Menu from '../../components/Menu'
 import Container from '../styles/form'
 import api from '../../services/api'
+import axios from 'axios'
 import formSchema from './formSchema'
 import arrayForSelect from './arrayForSelect'
 import 'react-toastify/dist/ReactToastify.css'
 
+interface iFormData {
+    email: string,
+    password: string,
+    confirmPassword: string,
+    name: string,
+    bio: string,
+    contact: string,
+    course_module: string
+}
+
 const Register = () => {
-    const [createUser, setCreateUser] = useState(null)
+    const [createUser, setCreateUser] = useState<iFormData | null>(null)
     const navigate = useNavigate()
     
     const { 
         register, 
         handleSubmit, 
         formState: { errors } } 
-        = useForm({ resolver: yupResolver(formSchema) })
-    const onSubmit = data => setCreateUser(data)
+        = useForm<iFormData>({ resolver: yupResolver(formSchema) })
+    const onSubmit = (data: iFormData) => setCreateUser(data)
 
     useEffect(() => {
         async function registerUser() {
@@ -30,8 +41,10 @@ const Register = () => {
                     notifySuccess()
                     navigate('/')
                 } catch (error) {
-                    // eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-unused-expressions
-                    error.response.data.message === 'Email already exists' ? notifyError() : undefined
+                    if (axios.isAxiosError(error)) {
+                        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                        error.response?.data.message === 'Email already exists' ? notifyError() : undefined
+                    }
                 }
             }
         }
@@ -103,7 +116,7 @@ const Register = () => {
                         <p className='error'>{errors.contact?.message}</p>
 
                         <label htmlFor='module'>Escolha o módulo</label>
-                        <select name='course_module' id='module' {...register('course_module')}>
+                        <select id='module' {...register('course_module')}>
                             <option value=''>Escolha</option>
                             {
                                 arrayForSelect.map((element, index) => (

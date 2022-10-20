@@ -6,15 +6,24 @@ import Button from '../../../components/Button'
 import ModalStyle from './modal'
 import formSchema from './formSchema'
 
-const Modal = ({ setShowModal }) => {
+interface iModal {
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+interface iData {
+    title: string,
+    status: string
+}
+
+const Modal = ({ setShowModal }: iModal) => {
     const options = ['Iniciante', 'Intermediário', 'Avançado']
     const { setTech } = useContext(TechContext)
 
     const {
         register, 
         handleSubmit,
-        formState: { errors }} = useForm({ resolver: yupResolver(formSchema)})
-    const onSubmit = data => setTech(data)
+        formState: { errors }} = useForm<iData>({ resolver: yupResolver(formSchema)})
+    const onSubmit = (data: iData) => setTech(data)
 
     return (
         <ModalStyle>
@@ -32,7 +41,6 @@ const Modal = ({ setShowModal }) => {
                     <label htmlFor='techName'>Nome da tecnologia</label>
                     <input 
                     type='text' 
-                    name='techName' 
                     id='techName' 
                     placeholder='Nome da tecnologia'
                     {...register('title')}/>
@@ -40,7 +48,6 @@ const Modal = ({ setShowModal }) => {
 
                     <label htmlFor='status'>Selecionar status</label>
                     <select 
-                    name='status' 
                     id='status'
                     {...register('status')}>
                         {
@@ -51,7 +58,7 @@ const Modal = ({ setShowModal }) => {
                     </select>
                     <p className='error'>{errors.status?.message}</p>
 
-                    <Button type='submit' content='Cadastrar tecnologia'/>
+                    <Button typeName='submit' content='Cadastrar tecnologia' className='modalBtn'/>
                 </form>
             </div>
         </ModalStyle>

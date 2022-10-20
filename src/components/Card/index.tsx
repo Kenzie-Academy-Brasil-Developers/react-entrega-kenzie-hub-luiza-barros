@@ -1,7 +1,7 @@
 import { AiFillDelete } from 'react-icons/ai'
 import CardStyle from './card'
 
-interface iTech {
+export interface iTech {
     title: string,
     status: string,
     id: string
@@ -9,7 +9,7 @@ interface iTech {
 
 interface iCard {
     techs: iTech[],
-    setTechID: 
+    setTechID: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 const Card = ({ techs, setTechID }: iCard) => {

@@ -1,18 +1,33 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { notifyError, notifySuccess } from '../../toast/index'
+import { iTech } from '../../components/Card'
 import api from '../../services/api'
 
 interface iAuthProvider {
     children: ReactNode
 }
 
-export const AuthContext = createContext({})
+interface iUser {
+    id: string,
+    name: string,
+    email: string,
+    course_module: string,
+    bio: string,
+    contact: string,
+    techs: iTech
+}
+
+interface iAuthContext {
+    
+}
+
+export const AuthContext = createContext<iAuthContext>({} as iAuthContext)
 
 const AuthProvider = ({ children }: iAuthProvider) => {
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState<iUser | null>(null)
     const [loading, setLoading] = useState(true)
-    const [techID, setTechID] = useState(null)
+    const [techID, setTechID] = useState<string | null>(null)
 
     const navigate = useNavigate()
 
