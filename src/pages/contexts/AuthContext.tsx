@@ -4,11 +4,7 @@ import { notifyError, notifySuccess } from '../../toast/index'
 import { iTech } from '../../components/Card'
 import api from '../../services/api'
 
-interface iAuthProvider {
-    children: ReactNode
-}
-
-interface iUser {
+export interface iUser {
     id: string,
     name: string,
     email: string,
@@ -16,6 +12,10 @@ interface iUser {
     bio: string,
     contact: string,
     techs: iTech[] | null
+}
+
+interface iAuthProvider {
+    children: ReactNode
 }
 
 interface iAuthContext {
@@ -44,7 +44,7 @@ const AuthProvider = ({ children }: iAuthProvider) => {
                 try {
                     api.defaults.headers.authorization = `Bearer ${token}`
                     
-                    const { data } = await api.get('/profile')
+                    const { data } = await api.get<iUser>('/profile')
                     setUser(data)
 
                     navigate('/dashboard')
@@ -61,7 +61,7 @@ const AuthProvider = ({ children }: iAuthProvider) => {
         async function deleteTech() {
             if (techID) {
                 try {
-                    await api.delete(`/users/techs/${techID}`)
+                    await api.delete<void>(`/users/techs/${techID}`)
                     notifySuccess()
                 } catch (error) {
                     notifyError()
@@ -73,7 +73,7 @@ const AuthProvider = ({ children }: iAuthProvider) => {
 
     useEffect(() => {
         async function checkUser() {
-            const { data } = await api.get('/profile')
+            const { data } = await api.get<iUser>('/profile')
             setUser(data)
         }
         checkUser()

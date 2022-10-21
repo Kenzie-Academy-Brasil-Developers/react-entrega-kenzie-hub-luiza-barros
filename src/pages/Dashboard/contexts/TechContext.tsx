@@ -16,6 +16,11 @@ interface iTechContext {
     setTech:  React.Dispatch<React.SetStateAction<iTechModal | null>>
 }
 
+interface iCreateTech {
+    status: string,
+    message: string
+}
+
 export const TechContext = createContext<iTechContext>({} as iTechContext)
 
 const TechProvider = ({ children }: iTechProvider) => {
@@ -25,7 +30,7 @@ const TechProvider = ({ children }: iTechProvider) => {
         async function createTech() {
             if (tech) {
                 try {
-                    await api.post('/users/techs', tech)
+                    await api.post<iCreateTech>('/users/techs', tech)
                     notifySuccess()
                 } catch (error) {
                     notifyError()

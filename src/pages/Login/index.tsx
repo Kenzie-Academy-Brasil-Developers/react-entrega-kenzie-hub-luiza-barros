@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate, Link } from 'react-router-dom'
 import { notifySuccess, notifyError } from '../../toast'
-import { AuthContext } from '../contexts/AuthContext'
+import { AuthContext, iUser } from '../contexts/AuthContext'
 import Button from '../../components/Button'
 import Container from '../styles/form'
 import api from '../../services/api'
@@ -11,13 +11,18 @@ import axios from 'axios'
 import formSchema from './formSchema'
 import 'react-toastify/dist/ReactToastify.css'
 
-interface iUserRegister {
+interface iUserInfoLogin {
     email: string,
     password: string
 }
 
+interface iUserLogin {
+    user: iUser,
+    token: string
+}
+
 const Login = () => {
-    const [loginUser, setLoginUser] = useState<iUserRegister | null>(null)
+    const [loginUser, setLoginUser] = useState<iUserInfoLogin | null>(null)
     const { setUser } = useContext(AuthContext)
     const load = useRef<HTMLDivElement>(null)
 
@@ -27,14 +32,14 @@ const Login = () => {
         register, 
         handleSubmit, 
         formState: { errors } } 
-        = useForm<iUserRegister>({ resolver: yupResolver(formSchema) })
-    const onSubmit = (data: iUserRegister) => setLoginUser(data)
+        = useForm<iUserInfoLogin>({ resolver: yupResolver(formSchema) })
+    const onSubmit = (data: iUserInfoLogin) => setLoginUser(data)
 
     useEffect(() => {
         async function loadUser() {
             if (loginUser) {
                 try {
-                    const response = await api.post('/sessions', loginUser)
+                    const response = await api.post<iUserLogin>('/sessions', loginUser)
                     notifySuccess()
 
                     localStorage.setItem('@kenziehub:token', response.data.token)

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from 'react-router-dom'
 import { notifySuccess, notifyError } from '../../toast'
+import { iUser } from '../contexts/AuthContext'
 import Button from '../../components/Button'
 import Menu from '../../components/Menu'
 import Container from '../styles/form'
@@ -37,7 +38,7 @@ const Register = () => {
         async function registerUser() {
             if (createUser) {
                 try {
-                    await api.post('/users', createUser)
+                    await api.post<iUser>('/users', createUser)
                     notifySuccess()
                     navigate('/')
                 } catch (error) {
